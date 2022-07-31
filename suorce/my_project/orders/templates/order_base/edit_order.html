@@ -1,0 +1,37 @@
+{% extends 'order_base/orders_base.html' %} {% block content %}
+<div class="form-floating container">
+  <h1>Edit : {{order.name}}</h1>
+  <form action="/orders/update_order/{{order.id}}/" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="exampleInputEmail1">Customer: </label>
+      <span type="text" name="order_customer">{{order.customer}}</span>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Name: </label>
+      <input
+        type="text"
+        class="form-control"
+        value="{{order.name}}"
+        name="order_name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Quantity: </label>
+      <input
+        type="text"
+        class="form-control"
+        value="{{order.quantity}}"
+        name="order_quantity"
+      />
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Submit" />
+  </form>
+</div>
+{% endblock content %}
+
+<div class="input-group flex-nowrap">
+  <span class="input-group-text" id="addon-wrapping">Price: </span>
+  <input type="text" class="form-control" name="price" value="{{book.price}}" />
+</div>
