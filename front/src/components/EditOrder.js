@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 import { useParams } from "react-router-dom";
 
@@ -6,7 +8,7 @@ const EditOrder = () => {
   const params = useParams();
   const [order, setOrder] = useState([]);
   useEffect(() => {
-    fetch(`/api/order_detail/${params.id}/`)
+    fetch(`/orders/api/order_detail/${params.id}/`)
       .then((res) => res.json())
       .then((res) => {
         setOrder(res);
@@ -15,19 +17,26 @@ const EditOrder = () => {
   }, [params.id]);
   return (
     <div className="container">
-      <div class="MuiInput-root">
+      <div className="MuiInput-root">
         <h3>Edit {order.name}</h3>
         Order name
-        <input class="MuiInput-input" value={order.name} />
+        <input className="MuiInput-input" value={order.name} />
         <br />
         <br />
         Order Quantity
-        <input class="MuiInput-input" value={order.quantity} />
+        <input className="MuiInput-input" value={order.quantity} />
         <br />
         <br />
         Customer
-        <input class="MuiInput-input" value={order.customer} />
+        <input className="MuiInput-input" value={order.customer_name} />
       </div>
+      <br />
+      <br />
+      <Button variant="contained">
+        <Link to={`/`} style={{ textDecoration: "none" }}>
+          Update
+        </Link>
+      </Button>
     </div>
   );
 };

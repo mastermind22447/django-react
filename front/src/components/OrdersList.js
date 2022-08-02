@@ -11,17 +11,21 @@ import Button from "@mui/material/Button";
 
 const OrdersList = () => {
   const [orders, setOrders] = useState([]);
+  // const [customers, setCustomers] = useState([]);
   useEffect(() => {
-    fetch(`api/`)
+    fetch(`/orders/api/`)
       .then((res) => res.json())
       .then((res) => {
-        setOrders(res);
+        setOrders(res["orders"]);
+        // setCustomers(res["customers"]);
       })
       .catch((err) => console.error(err));
   }, []);
   return (
     <>
-      <Button href="#text-buttons">Add Order</Button>
+      <Link to={`/order/add`} style={{ textDecoration: "none" }}>
+        Add Order
+      </Link>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -41,16 +45,27 @@ const OrdersList = () => {
               >
                 <TableCell>{order.id}</TableCell>
                 <TableCell>
-                  <Link to={`/order/${order.id}`}>{order.name}</Link>
+                  <Link
+                    to={`/order/${order.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    {order.name}
+                  </Link>
                 </TableCell>
                 <TableCell>
                   <Button href="#" variant="text">
-                    {order.customer}
+                    {order.customer_name}
                   </Button>
                 </TableCell>
                 <TableCell>{order.quantity}</TableCell>
                 <TableCell>
-                  <Link to={`/order/edit/${order.id}`}>Edit</Link>|
+                  <Link
+                    to={`/order/edit/${order.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Edit
+                  </Link>
+                  |
                   <Button href="#" variant="text">
                     Delete
                   </Button>

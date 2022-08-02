@@ -8,7 +8,7 @@ const OrderDetail = () => {
   //   console.log("params: ", params);
   const [order, setOrder] = useState([]);
   useEffect(() => {
-    fetch(`/api/order_detail/${params.id}/`)
+    fetch(`/orders/api/order_detail/${params.id}/`)
       .then((res) => res.json())
       .then((res) => {
         setOrder(res);
@@ -21,7 +21,7 @@ const OrderDetail = () => {
     <div>
       <h1>This is {order.name} detail page</h1>
       <p>{order.name}</p>
-      <p>{order.customer}</p>
+      <p>{order.customer_name}</p>
       <p>{order.quantity}</p>
     </div>
   );

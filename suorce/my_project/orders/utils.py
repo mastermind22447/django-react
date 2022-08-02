@@ -5,4 +5,5 @@ from .serializers import OrderSerializer
 def getOrders(request):
     orders = Orders.objects.all()
     serializer = OrderSerializer(orders, many=True)
-    return Response(serializer.data)
+    a = {'name': 'sinasaderi'}
+    return Response({"orders": serializer.data, "aaaa": a})
