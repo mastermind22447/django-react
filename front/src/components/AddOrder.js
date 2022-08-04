@@ -10,15 +10,18 @@ import Button from "@mui/material/Button";
 
 const AddOrder = () => {
   const [orders, setOrders] = useState([]);
+  const [customers, setCustomers] = useState([]);
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [customer, setCustomer] = useState();
+
   // console.log("orders: ", orders);
   useEffect(() => {
     fetch("/orders/api/")
       .then((res) => res.json())
       .then((res) => {
         setOrders(res["orders"]);
+        setCustomers(res["customers"]);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -67,10 +70,9 @@ const AddOrder = () => {
                 label="Customer"
                 onChange={handleChange}
               >
-                <MenuItem value={""}></MenuItem>
-                {orders.map((order, index) => (
-                  <MenuItem value={order.customer_id} key={index}>
-                    {order.customer_name}
+                {customers.map((customer, index) => (
+                  <MenuItem value={customer.id} key={index}>
+                    {customer.name}
                   </MenuItem>
                 ))}
               </Select>
