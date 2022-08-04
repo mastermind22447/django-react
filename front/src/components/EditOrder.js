@@ -36,6 +36,7 @@ const EditOrder = () => {
       .then((response) => response.json())
       .then((data) => {});
   };
+  console.log("id:", params.id);
 
   return (
     <div className="container">

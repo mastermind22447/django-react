@@ -9,10 +9,18 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
-const OrdersList = () => {
+const OrdersList = ({ match }) => {
+  // let orderId = match.params.id;
   const [orders, setOrders] = useState([]);
+
+  // let id = params.id;
+  // const orderId = orders.useParams.id;
+
   // const [customers, setCustomers] = useState([]);
   useEffect(() => {
+    getOrders();
+  }, []);
+  function getOrders() {
     fetch(`/orders/api/`)
       .then((res) => res.json())
       .then((res) => {
@@ -20,7 +28,22 @@ const OrdersList = () => {
         // setCustomers(res["customers"]);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }
+  // console.log("order_id:", orders[0]);
+
+  const deleteOrder = (id) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(),
+    };
+
+    fetch(`/orders/api/delete_order/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        getOrders();
+      });
+  };
   return (
     <>
       <Link to={`/order/add`} style={{ textDecoration: "none" }}>
@@ -66,7 +89,7 @@ const OrdersList = () => {
                     Edit
                   </Link>
                   |
-                  <Button href="#" variant="text">
+                  <Button onClick={() => deleteOrder(order.id)} variant="text">
                     Delete
                   </Button>
                 </TableCell>

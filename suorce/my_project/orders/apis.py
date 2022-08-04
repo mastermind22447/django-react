@@ -51,7 +51,7 @@ def customer_detail(request, customer_id):
     serializer = OrderSerializer(order, many=True)
     return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['DELETE'])
 def delete_order(request, order_id):
     order = Orders.objects.filter(id=order_id)
     order.delete()

@@ -38,9 +38,10 @@ const AddOrder = () => {
         quantity: quantity,
       }),
     };
-    fetch(`/orders/api/add_order/`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {});
+    fetch(`/orders/api/add_order/`, requestOptions).then((response) =>
+      response.json()
+    );
+    // .then((data) => {});
   };
   // console.log("customer:", customer);
 
