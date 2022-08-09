@@ -71,8 +71,8 @@ const AddOrder = () => {
                 label="Customer"
                 onChange={handleChange}
               >
-                {customers.map((customer, index) => (
-                  <MenuItem value={customer.id} key={index}>
+                {customers.map((customer) => (
+                  <MenuItem value={customer.id} key={customer.id}>
                     {customer.name}
                   </MenuItem>
                 ))}

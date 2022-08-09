@@ -18,25 +18,22 @@ const EditOrder = () => {
       })
       .catch((err) => console.error(err));
   }, [params.id]);
-  // let data = {
-  //   name: order.name,
-  // };
 
-  const post = () => {
+  const updateOrder = () => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        customer: customer,
+        customer: order.customer_id,
         name: name,
         quantity: quantity,
       }),
     };
-    fetch(`/orders/api/edit_order/${params.id}/`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {});
+    fetch(`/orders/api/edit_order/${params.id}/`, requestOptions).then(
+      (response) => response.json()
+    );
   };
-  console.log("id:", params.id);
+  // console.log("data: ", order);
 
   return (
     <div className="container">
@@ -47,7 +44,7 @@ const EditOrder = () => {
           className="MuiInput-input"
           type="text"
           id="name"
-          defaultValue={order.name}
+          defaultValue={order.name || ""}
           onChange={(e) => {
             setName(e.target.value);
           }}
@@ -57,7 +54,7 @@ const EditOrder = () => {
         Order Quantity
         <input
           className="MuiInput-input"
-          defaultValue={order.quantity}
+          defaultValue={order.quantity || ""}
           onChange={(e) => setQuantity(e.target.value)}
         />
         <br />
@@ -65,13 +62,13 @@ const EditOrder = () => {
         Customer
         <input
           className="MuiInput-input"
-          defaultValue={order.customer_name}
+          value={order.customer_name || ""}
           onChange={(e) => setCustomer(e.target.value)}
         />
       </div>
       <br />
       <br />
-      <Button onClick={() => post()} variant="contained">
+      <Button onClick={() => updateOrder()} variant="contained">
         <Link to={`/`} style={{ textDecoration: "none" }}>
           Update
         </Link>
